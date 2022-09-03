@@ -69,13 +69,7 @@ def random_fortune():
     return f'今日の運勢は{fortune}です！頑張りましょう！'
 
 
-@app.route('/calculation', methods=['POST'])
-def json_calc():
-    get_numbers = request.get_json(force=True)
-    num1 = get_numbers.get('number1', None)
-    num2 = get_numbers.get('number2', None)
 
-    return num1 + num2
 
 # python app.pyという名前で実行されたらサーバーが立ち上がる。
 if __name__ == "main":
