@@ -80,6 +80,6 @@ def login_message():
 
 
 
-# python app.pyという名前で実行されたらサーバーが立ち上がる。
+# flask runコマンドで実行されたらサーバーが立ち上がる。
 if __name__ == "main":
     app.run(debug=True)
