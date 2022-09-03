@@ -70,6 +70,15 @@ def random_fortune():
 
 
 
+@app.route('/login', methods=['POST'])
+def login_message():
+    """コマンド例: curl -X POST -d  '{"username": "hoge", "password": "123456"}' http://localhost:5000/login"""
+    req = request.get_json(force=True)
+    username = req.get('username', None)
+    password = req.get('password', None)
+    return f'username..."{username}"とpassword..."{password}"を登録しました。'
+
+
 
 # python app.pyという名前で実行されたらサーバーが立ち上がる。
 if __name__ == "main":
