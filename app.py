@@ -10,7 +10,8 @@ app = Flask(__name__)
 # localhost:5000にアクセスした時の処理
 @app.route('/', methods=['GET'])
 def raretech_message():
-    return '夢は、目標に向かって毎日歩みを進めた者だけが叶えられる。今日の二時間は、その一歩だ'
+    return '夢は、目標に向かって毎日歩みを進めた者だけが叶えられる。\
+            今日の二時間は、その一歩だ'
 
 
 # /timeへgetでアクセスしたら現在時刻を知らせる
@@ -48,7 +49,7 @@ def gratitude_message():
     コマンド例: curl -X POST -d 'name=kazu' http://localhost:5000/message
     """
     username = request.form.get('name')
-    return f'頑張りすぎるのも良くないぞ。{username}は既に頑張っている。ただ、情熱だけは忘れるな！！！'
+    return f'毎日お疲れ様。{username}さん、これからも情熱を忘れずに行こう!!!'
 
 
 # /aphorismへアクセルすると、名言をランダムに返す
@@ -72,7 +73,10 @@ def random_fortune():
 
     fortune = random.choice(fortunes)
 
-    return f'今日の運勢は{fortune}です！頑張りましょう！'
+    if fortune == '大吉':
+        return f'おめでとう!!!{fortune}です!!今日は最高な1日になりますよ!'
+    else:
+        return f'今日の運勢は{fortune}です!頑張りましょう!'
 
 
 @app.route('/login', methods=['POST'])
