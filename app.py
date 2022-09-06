@@ -52,7 +52,7 @@ def gratitude_message():
     return f'毎日お疲れ様。{username}さん、これからも情熱を忘れずに行こう!!!'
 
 
-# /aphorismへアクセルすると、名言をランダムに返す
+# /aphorismへアクセスすると、名言をランダムに返す
 @app.route('/aphorism', methods=['GET'])
 def aphorism():
     aphorism_words = ['Done is better than perfect.',
