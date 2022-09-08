@@ -1,7 +1,5 @@
 # Flask-API-Project
-
-Python のフレームワークである Flask を利用した、API の Practice  
-今回使用しているのは、Flask のみです。
+こちらのハンズオンでは、Pythonの軽量ウェブフレームワークであるFlaskを利用したAPIを作成します。
 
 ## 使用言語とバージョン
 
@@ -12,7 +10,7 @@ Python のフレームワークである Flask を利用した、API の Practic
 
 | エンドポイント | method | コマンド例                                                                                 |                             |
 | -------------- | ------ | ------------------------------------------------------------------------------------------ | --------------------------- |
-| /              | GET    | `curl localhost:5000`                                                                      | RareTECH のメッセージを返す |
+| /              | GET    | `curl localhost:5000`                                                                      | メッセージを返す |
 | /time          | GET    | `curl localhost:5000/time`                                                                 | 現在時刻を返す              |
 | /date          | GET    | `curl -X POST -d 'days=2022-10-03' http://localhost:5000/date`                             | 入力した日付から曜日を算出  |
 | /aphorism      | GET    | `curl localhost:5000/aphorism`                                                             | 偉人の名言を返す            |
@@ -21,41 +19,50 @@ Python のフレームワークである Flask を利用した、API の Practic
 | /login         | POST   | `curl -X POST -d '{"username": "hoge", "password": "123456"}' http://localhost:5000/login` | ログイン機能のサンプル      |
 
 ## 環境構築
+以下、macでの環境を想定しています。
 
-### 1. virtualenv にて仮想環境構築(mac の場合)
+### 1. virtualenv によるPython環境の構築
+Python での仮想環境を構築するため、virtualenv をインストールする。
 
-Python での仮想環境を構築するため、virtualenv をインストール。
+```bash
+pip3 install virtualenv
+```
 
-`pip3 install virtualenv`
+以下のエラーが発生した場合、コマンドの先頭に`sudo`をつけて再度実行する。
+```bash
+Could not install packages due to an EnvironmentError: [Errno 13] Permission denied: '/Library/Python/3.7'Consider using the `--user` option or check the permissions. 
+```  
 
-もし  
-`` Could not install packages due to an EnvironmentError: [Errno 13] Permission denied: '/Library/Python/3.7'Consider using the `--user` option or check the permissions. ``  
-というエラーが発生した場合、パーミッションがないと言われているので、`sudo`をつけて再度コマンドを実行する。
+```bash
+sudo pip3 install virtualenv
+```
 
-`sudo pip3 install virtualenv`
+次に、プロジェクトを作成したいディレクトリへ移動し、下記コマンドを実行する。 こちらのコマンドにより、移動したディレクトリに virtualenv の設定ファイルが作成される。
+```bash
+virtualenv env
+```
+次に、以下のコマンドで virtualenv を有効化する。  
+```bash
+source env/bin/activate
+```
 
-### 2. virtualenv 立ち上げ
+virtualenvでの環境構築が成功した場合、以下のように、プロンプトの前に()でvirtualenvコマンドを実行した時の名前が表示される。
+```bash
+(env)user@hoge|ディレクトリ
+```
 
-プロジェクトを作成したいディレクトリへ移動して、下記コマンドを実行。  
-`virtualenv env`  
-これで、移動したディレクトリに virtualenv の設定ファイルが作成される。  
-設定ファイルが作成されているのを確認したら、  
-`source env/bin/activate`  
-コマンドで virtualenv を有効化する。  
-成功すると、  
-`(env)user@hoge|ディレクトリ`  
-と、プロンプトの前に()で`virtualenv`コマンドを実行した時の名前が表示される。
+### 2. Flask のインストール
+以下のコマンドで、Flask をインストールする。
+```bash
+pip3 install flask
+```
 
-### 3. Flask のインストール
+### 3. app.py の作成
+現在のディレクトリにファイル`app.py`を作成する。  
+```bash
+touch app.py
+```  
 
-仮想環境が有効化されている状態で、  
-`pip3 install flask`  
-を実行すると、仮想環境内でだけ flask がインストールされる。
-
-### 4. app.py の作成
-
-flask をインストールした、現在のディレクトリにファイル`app.py`を作成する。  
-`touch app.py`  
 作成した`app.py`ファイルに以下の内容を記述する。
 
 ```python
@@ -74,11 +81,10 @@ if __name__ == "__main__":
     app.run(debug=True)
 ```
 
-## サーバーの立ち上げ
+## 4. サーバーの立ち上げ
+`app.py`ファイルと同じディレクトリにて、以下のコマンドを実行し、APIサーバーを起動する。
+`http://localhost:5000`にブラウザでアクセスし、`Hello World`が表示されると完了です。
+```bash
+flask run
+```
 
-`app.py`ファイルのあるディレクトリで  
-`flask run`  
-コマンドを実行することで、サーバーを立ち上げることができる。  
-`localhost:5000`にブラウザでアクセスして、`Hello World`が表示されればサーバーの立ち上げに成功。
-
-サーバーを立ち上げる前に、`export FLASK_DEBUG=1` コマンドを実行すると、デバッグモードでサーバーを立ち上げることが可能。
